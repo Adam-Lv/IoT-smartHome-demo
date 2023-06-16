@@ -5,8 +5,8 @@
 extern env myenv;
 
 /**
- * Return the temprature inside the room.
+ * Return the temperature inside the room.
  */
-double get_temprature() { return myenv.temperature_in; }
+double get_temperature() { return myenv.temperature_in; }
 
 #endif

@@ -1,0 +1,4 @@
+back_end:
+  remote_ipv6: "2001:660:5307:3111::a777"
+  static_folder: "dashboard/dist/"
+  port: 8000

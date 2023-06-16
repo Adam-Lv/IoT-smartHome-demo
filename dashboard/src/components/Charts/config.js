@@ -70,8 +70,8 @@ export let purpleChartOptions = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 60,
-        suggestedMax: 125,
+        suggestedMin: 0,
+        suggestedMax: 40,
         padding: 20,
         fontColor: "#9a9a9a"
       }
@@ -156,8 +156,8 @@ export let greenChartOptions = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 50,
-        suggestedMax: 125,
+        suggestedMin: 0,
+        suggestedMax: 40,
         padding: 20,
         fontColor: "#9e9e9e"
       }
@@ -199,8 +199,8 @@ export let barChartOptions = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 60,
-        suggestedMax: 120,
+        suggestedMin: 0,
+        suggestedMax: 25,
         padding: 20,
         fontColor: "#9e9e9e"
       }

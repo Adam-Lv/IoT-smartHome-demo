@@ -24,6 +24,11 @@ import './registerServiceWorker'
 Vue.use(BlackDashboard);
 Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
+const eventBus = new Vue()
+eventBus.$on('refreshData', () => {
+  this.refreshData();
+});
+Vue.prototype.$eventBus = eventBus;
 
 /* eslint-disable no-new */
 new Vue({

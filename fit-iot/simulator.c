@@ -70,7 +70,7 @@ inline void process_daily_light() {
     myenv.light = 0;
 }
 
-void process_temprature(double lower_bound, double upper_bound) {
+void process_temperature(double lower_bound, double upper_bound) {
   srand(myenv.day * 24 + myenv.hour);
   double mean = (lower_bound + upper_bound) / 2.0;
   double A = (upper_bound - lower_bound) / 2.0;
@@ -102,9 +102,9 @@ static void process_all() {
   process_time();
   process_daily_light();
   // if it is summer
-  process_temprature(20.0, 36.0);
+  process_temperature(20.0, 36.0);
   // if it is winter
-  // process_temprature(-10.0, 10.0);
+  // process_temperature(-10.0, 10.0);
 }
 
 PROCESS(simulation, "Simulation");
@@ -123,8 +123,8 @@ PROCESS_THREAD(simulation, ev, data) {
       process_all();
       printf("Current time: %d, light intensity: %d, lamp state: %d\n",
              myenv.hour, get_light(), myenv.lamp.state);
-      printf("Temprature outside: %.2f, Temprature inside: %.2f\n",
-             myenv.temperature_out, get_temprature());
+      printf("Temperature outside: %.2f, Temperature inside: %.2f\n",
+             myenv.temperature_out, get_temperature());
       printf("Air-conditioner state: %d\n", myenv.air_conditioner.state);
       etimer_restart(&timer);
     } else if (ev == tcpip_event)
@@ -165,7 +165,7 @@ static PT_THREAD(generate_routes(struct httpd_state *s)) {
   int lamp_state = get_lamp_state();
 
   int ac_state = get_ac_state();
-  double temp_in = get_temprature();
+  double temp_in = get_temperature();
   double temp_out = myenv.temperature_out;
 
   // ADD adds the printline into the buffer buf

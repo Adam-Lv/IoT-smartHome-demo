@@ -6,7 +6,7 @@ import threading
 from dataclasses import dataclass
 
 
-class ControllerServer:
+class Controller:
     @dataclass(repr=True, eq=True, order=True)
     class Env:
         day: int
@@ -58,7 +58,7 @@ class ControllerServer:
             if self._env != curr_env:
                 self._env = curr_env
                 self._insert_env_param(curr_env)
-                self.automation_control(curr_env)
+                self._automation_control(curr_env)
             time.sleep(0.5)
 
     def _insert_env_param(self, env):
@@ -174,7 +174,7 @@ class ControllerServer:
         self._enable_automation.air_conditioner = False
         return self._send_air_conditioner_heat()
 
-    def automation_control(self, curr_env):
+    def _automation_control(self, curr_env):
         if self._enable_automation.lamp:
             if curr_env.light_intensity <= 1 and curr_env.lamp_state == 0:
                 if self._send_turn_on_lamp():
@@ -278,7 +278,7 @@ class ControllerServer:
 
 
 def main():
-    controller = ControllerServer('2001:660:5307:3111::a777')
+    controller = Controller('2001:660:5307:3111::a777')
     controller.cli()
 
 
