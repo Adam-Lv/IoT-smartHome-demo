@@ -46,7 +46,7 @@
         <card type="chart">
           <template slot="header">
             <h5 class="card-category">{{ $t('dashboard.cumulative') }}</h5>
-            <h3 class="card-title"><i class="tim-icons icon-calendar-60 text-primary "></i> Average Daily Temperature
+            <h3 class="card-title"><i class="tim-icons icon-calendar-60 text-primary "></i> Average Daily Outdoor Temperature
             </h3>
           </template>
           <div class="chart-area">
@@ -197,7 +197,7 @@ export default {
     getChartData() {
       this.bigLineChart.allData = [];
       let fd = new FormData()
-      fd.append('data_type', 'temperature_out');
+      fd.append('data_type', 'temperature_in');
       axios({
         method: 'post',
         url: '/api/data-fetch',
@@ -214,7 +214,7 @@ export default {
       });
 
       fd = new FormData()
-      fd.append('data_type', 'temperature_in');
+      fd.append('data_type', 'temperature_out');
       axios({
         method: 'post',
         url: '/api/data-fetch',

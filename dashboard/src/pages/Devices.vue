@@ -230,6 +230,7 @@ export default {
         if (code === 0) {
           this.notifyVueSuccess('bottom', 'center');
           this.air_conditioner.state = 'COOL';
+          this.air_conditioner.automation = 'OFF';
         } else {
           this.notifyVueError('bottom', 'center');
         }
@@ -255,6 +256,7 @@ export default {
         if (code === 0) {
           this.notifyVueSuccess('bottom', 'center');
           this.air_conditioner.state = 'HEAT';
+          this.air_conditioner.automation = 'OFF';
         } else {
           this.notifyVueError('bottom', 'center');
         }
@@ -280,6 +282,7 @@ export default {
         if (code === 0) {
           this.notifyVueSuccess('bottom', 'center');
           this.air_conditioner.state = 'OFF';
+          this.air_conditioner.automation = 'OFF';
         } else {
           this.notifyVueError('bottom', 'center');
         }
@@ -355,6 +358,7 @@ export default {
         if (code === 0) {
           this.notifyVueSuccess('bottom', 'center');
           this.lamp.state = 'ON';
+          this.lamp.automation = 'OFF';
         } else {
           this.notifyVueError('bottom', 'center');
         }
@@ -380,6 +384,7 @@ export default {
         if (code === 0) {
           this.notifyVueSuccess('bottom', 'center');
           this.lamp.state = 'OFF';
+          this.lamp.automation = 'OFF';
         } else {
           this.notifyVueError('bottom', 'center');
         }

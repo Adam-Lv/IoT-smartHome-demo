@@ -9,6 +9,7 @@ typedef struct env
   int light;
   double temperature_out;
   double temperature_in;
+  double offset;
   Lamp lamp;
   AirConditioner air_conditioner;
 } env;

@@ -4,9 +4,9 @@
     "simpleTable": "Simple Table",
     "Environment": "Today's Environment",
     "chartCategories": [
-      "Temperature outside",
-      "Temperature inside",
-      "Light intensity"
+      "Indoor Temperature",
+      "Outdoor Temperature",
+      "Light Intensity"
     ]
   },
   "sidebar": {

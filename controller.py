@@ -59,7 +59,7 @@ class Controller:
                 self._env = curr_env
                 self._insert_env_param(curr_env)
                 self._automation_control(curr_env)
-            time.sleep(0.5)
+            # time.sleep(0.5)
 
     def _insert_env_param(self, env):
         try:

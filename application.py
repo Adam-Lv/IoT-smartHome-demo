@@ -1,3 +1,5 @@
+import threading
+
 import pymysql
 from flask import Flask, request
 from controller import Controller
@@ -171,4 +173,7 @@ def device_info():
     return json.dumps(res)
 
 
-app.run(port=config['back_end']['port'])
+if __name__ == '__main__':
+    # get_env_param_thread = threading.Thread(target=controller.get_env_parameters)
+    # get_env_param_thread.start()
+    app.run(port=config['back_end']['port'])

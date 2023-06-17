@@ -39,6 +39,7 @@ extern env myenv = {
   .light = 0,
   .temperature_out = 28.0,
   .temperature_in = 28.0,
+  .offset = 0.0,
   .lamp = {
     .state = 0,
   },
@@ -54,6 +55,8 @@ inline void process_time() {
   if (time_curr == 24) {
     myenv.day += 1;
     time_curr = 0;
+    srand(myenv.day * 24);
+    myenv.offset = 6 * ((double)rand() / (double)RAND_MAX - 0.5);
   }
   myenv.hour = time_curr;
 }
@@ -72,13 +75,13 @@ inline void process_daily_light() {
 
 void process_temperature(double lower_bound, double upper_bound) {
   srand(myenv.day * 24 + myenv.hour);
-  double mean = (lower_bound + upper_bound) / 2.0;
+  double mean = (lower_bound + upper_bound) / 2.0 + myenv.offset;
   double A = (upper_bound - lower_bound) / 2.0;
-  double max_vibaration = A * (1 - sin(5 * PI / 12));
-  
+  double max_vibaration = A * (1 - sin(PI / 3));
+
   int time_curr = myenv.hour + 1;
-  double curr_temp_mean = mean - A * sin(PI * time_curr / 12.0);
-  double vibration = max_vibaration * (rand() / RAND_MAX) - max_vibaration / 2;
+  double curr_temp_mean = mean - A * sin(PI * (time_curr + 3) / 12.0);
+  double vibration = max_vibaration * ((double)rand() / (double)RAND_MAX) - max_vibaration / 2;
   double curr_temp_out = curr_temp_mean + vibration;
   
   double prev_temp_out = myenv.temperature_out;
@@ -86,19 +89,19 @@ void process_temperature(double lower_bound, double upper_bound) {
   double prev_temp_in = myenv.temperature_in;
   // printf("prev_temp_in = %f\n", prev_temp_in);
   int ac_state = myenv.air_conditioner.state;
-  double curr_temp_in = prev_temp_in + 5 * (ac_state == 2) - 3 * (ac_state == 1) + 0.3 * (prev_temp_out - prev_temp_in);
+  double curr_temp_in = prev_temp_in + 5 * (ac_state == 2) - 3 * (ac_state == 1) + 0.4 * (prev_temp_out - prev_temp_in);
   // printf("curr_temp_in = %f\n", curr_temp_in);
   if (curr_temp_in > 35) {
     curr_temp_in = 35.0;
   } else if (curr_temp_in < 0) {
     curr_temp_in = 0.0;
   }
-  
+
   myenv.temperature_out = curr_temp_out;
   myenv.temperature_in = curr_temp_in;
 }
 
-static void process_all() { 
+static void process_all() {
   process_time();
   process_daily_light();
   // if it is summer
